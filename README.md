@@ -1,0 +1,1 @@
+# spring-boot-maven-generate-code-coverage-report-jacoco
