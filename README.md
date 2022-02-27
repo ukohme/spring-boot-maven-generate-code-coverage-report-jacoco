@@ -16,6 +16,12 @@ $ mvn clean install -U -X <br/>
 $ mvn spring-boot:run <br/>
 </pre>
 
+Generated code coverage report file is placed under "target/jacoco-report/" directory <br/>
+![target_directory](doc/target_directory.png) <br/><br/>
+
+Code coverage report can be accessed via browser.
+![target_directory](doc/jacoco_coverage_report.png) <br/><br/>
+
 swagger_ui can be accessed via https secure port 8443 from localhost : <br/>
 https://localhost:8443/customer-info/swagger-ui/index.html <br/><br/>
 ![https_swagger_ui](doc/https_swagger_ui.png) <br/><br/>
