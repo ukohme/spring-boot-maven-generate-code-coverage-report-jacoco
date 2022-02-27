@@ -74,7 +74,7 @@ $ docker run -p 8443:8443 -e "SPRING_PROFILES_ACTIVE=dev" demo:latest <br/>
 ### Save a new customer to database
 
 Method : HTTP.POST <br/>
-URL : https://localhost:8443/customer-info/customer/saveprogrammatic <br/>
+URL : https://localhost:8443/customer-info/customer/save <br/>
 HTTP Request Body : <br/>
 <pre>
 {
@@ -92,7 +92,7 @@ HTTP Request Body : <br/>
 
 Curl Request : <br/>
 <pre>
-curl --location --request POST 'https://localhost:8443/customer-info/customer/saveprogrammatic' \
+curl --location --request POST 'https://localhost:8443/customer-info/customer/save' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "name1",
