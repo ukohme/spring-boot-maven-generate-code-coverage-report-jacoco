@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
 
-        SONARQUBE_URL = 'http://ec2-13-234-239-23.ap-south-1.compute.amazonaws.com/'
+        SONARQUBE_URL = 'http://ec2-13-234-239-23.ap-south-1.compute.amazonaws.com'
         SONARQUBE_TOKEN = credentials('sonar_credentials')
     }
 
