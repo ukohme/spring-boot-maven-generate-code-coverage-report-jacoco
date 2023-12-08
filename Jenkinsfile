@@ -1,13 +1,10 @@
 pipeline {
     agent any
     tools {
-        // Note: this should match with the tool name configured in your jenkins instance (JENKINS_URL/configureTools/)
         maven "maven3"
     }
     environment {
-
-        SONARQUBE_URL = 'http://ec2-13-234-239-23.ap-south-1.compute.amazonaws.com'
-        SONARQUBE_TOKEN = credentials('sonar_credentials')
+      SCANNER_HOME = tool 'sonar_scanner'
     }
 
     stages {
@@ -25,17 +22,14 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-
-  stage('SonarQube analysis') {
-    environment {
-      SCANNER_HOME = tool 'sonar_scanner'
-    }
-    steps {
-    withSonarQubeEnv(credentialsId: 'sonar_credentials', installationName: 'loal_sonar') {
-         sh '''$SCANNER_HOME/bin/sonar-scanner'''
-       }
-     }
-}
+        
+        stage('SonarQube analysis') {
+           steps {
+                 withSonarQubeEnv(credentialsId: 'sonar_credentials', installationName: 'loal_sonar') {
+                 sh '''$SCANNER_HOME/bin/sonar-scanner'''
+                }
+              }
+            }
 
         stage('Quality Gate') {
             steps {
