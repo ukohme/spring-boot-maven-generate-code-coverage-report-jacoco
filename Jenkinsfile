@@ -26,16 +26,16 @@ pipeline {
             }
         }
 
-        stage('SonarQube Scan') {
-            steps {
-                script {
-                    // Run SonarQube analysis
-                    withSonarQubeEnv('SonarQube Server') {
-                        sh "mvn sonar:sonar -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_TOKEN}"
-                    }
-                }
-            }
-        }
+  stage('SonarQube analysis') {
+    environment {
+      SCANNER_HOME = tool 'sonar_scanner'
+    }
+    steps {
+    withSonarQubeEnv(credentialsId: 'sonar_credentials', installationName: 'loal_sonar') {
+         sh '''$SCANNER_HOME/bin/sonar-scanner'''
+       }
+     }
+}
 
         stage('Quality Gate') {
             steps {
