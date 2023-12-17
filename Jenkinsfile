@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Let's clone the source
-                    git branch: 'main', credentialsId: 'github_credentials_token', url: 'https://github.com/jmstechhome25/spring-boot-maven-generate-code-coverage-report-jacoco.git'
+                    git branch: 'main', credentialsId: 'gitadmin', url: 'https://github.com/ukohme/spring-boot-maven-generate-code-coverage-report-jacoco.git'
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
         
         stage('SonarQube analysis') {
            steps {
-                 withSonarQubeEnv(credentialsId: 'sonar_credentials', installationName: 'loal_sonar') {
+                 withSonarQubeEnv(credentialsId: 'sonar_credentials', installationName: 'local_sonar') {
                  sh '''$SCANNER_HOME/bin/sonar-scanner'''
                 }
               }
@@ -43,18 +43,5 @@ pipeline {
             }
         }
     }
-    post {
-        failure {
-            script {
-                currentBuild.result = 'FAILURE'
-            }
-        }
-
-        always {
-            step([$class: 'Mailer',
-                notifyEveryUnstableBuild: true,
-                recipients: "jmstechhome24@gmail.com gompanarayanarao2@gmail.com",
-                sendToIndividuals: true])
-        }
     }
 }
