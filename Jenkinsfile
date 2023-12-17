@@ -43,4 +43,18 @@ pipeline {
             }
         }
     }
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+            }
+        }
+
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: true,
+                recipients: "bishopedafe@gmail.com azureazure234@gmail.com ukohme@gmail.com",
+                sendToIndividuals: true])
+        }
+    }
   }
